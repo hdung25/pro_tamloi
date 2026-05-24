@@ -1,12 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import { useLanguage } from "@/context/language-context";
 
 type Props = {
   productName: string;
 };
 
 export function ProductDetailActions({ productName }: Props) {
+  const { language, t } = useLanguage();
   const [qty, setQty] = useState(1);
 
   const dec = () => setQty((q) => Math.max(1, q - 1));
@@ -16,13 +18,13 @@ export function ProductDetailActions({ productName }: Props) {
     <>
       <div className="mt-6">
         <p className="text-[13px] font-semibold text-[var(--color-ink)]">
-          Số lượng
+          {language === "vi" ? "Số lượng" : "Quantity"}
         </p>
         <div className="mt-2 inline-flex items-center overflow-hidden rounded-full border border-[var(--color-line)] bg-white">
           <button
             type="button"
             onClick={dec}
-            aria-label="Giảm số lượng"
+            aria-label={language === "vi" ? "Giảm số lượng" : "Decrease quantity"}
             className="flex h-10 w-10 items-center justify-center text-lg text-[var(--color-ink)] transition-colors hover:bg-[var(--color-cream)]"
           >
             −
@@ -33,7 +35,7 @@ export function ProductDetailActions({ productName }: Props) {
           <button
             type="button"
             onClick={inc}
-            aria-label="Tăng số lượng"
+            aria-label={language === "vi" ? "Tăng số lượng" : "Increase quantity"}
             className="flex h-10 w-10 items-center justify-center text-lg text-[var(--color-ink)] transition-colors hover:bg-[var(--color-cream)]"
           >
             +
@@ -45,11 +47,15 @@ export function ProductDetailActions({ productName }: Props) {
         <button
           type="button"
           onClick={() => {
-            alert(`Đã thêm ${qty} ${productName} vào giỏ hàng (demo)`);
+            if (language === "vi") {
+              alert(`Đã thêm ${qty} ${productName} vào giỏ hàng (demo)`);
+            } else {
+              alert(`Added ${qty} ${productName} to cart (demo)`);
+            }
           }}
           className="group inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-[var(--color-brand)] px-6 py-3 text-sm font-semibold uppercase tracking-wide text-white shadow-md transition-all duration-300 hover:-translate-y-0.5 hover:bg-[var(--color-brand-dark)] hover:shadow-lg"
         >
-          Thêm vào giỏ hàng
+          {language === "vi" ? "Thêm vào giỏ hàng" : "Add to cart"}
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4" aria-hidden>
             <circle cx="9" cy="20" r="1.5" />
             <circle cx="18" cy="20" r="1.5" />
@@ -58,7 +64,7 @@ export function ProductDetailActions({ productName }: Props) {
         </button>
         <button
           type="button"
-          aria-label="Thêm vào yêu thích"
+          aria-label={language === "vi" ? "Thêm vào yêu thích" : "Add to favorites"}
           className="flex h-12 w-12 items-center justify-center rounded-full border-2 border-[var(--color-brand)] text-[var(--color-brand)] transition-colors hover:bg-[var(--color-brand)] hover:text-white"
         >
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5" aria-hidden>

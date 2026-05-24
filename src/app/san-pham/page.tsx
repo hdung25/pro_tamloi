@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
-import { PageBanner } from "@/components/page-banner";
-import { ProductsPageClient } from "@/components/products/products-page-client";
-import { UspStrip } from "@/components/usp-strip";
+import { ProductsPageContent } from "./products-client";
 
 export const metadata: Metadata = {
   title: "Sản phẩm — Tâm Lợi Foods",
@@ -10,20 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function ProductsPage() {
-  return (
-    <>
-      <PageBanner
-        title="Sản phẩm"
-        subtitle="Tâm Lợi Foods mang đến đa dạng sản phẩm thơm ngon, tiện lợi và giàu dinh dưỡng — đồng hành mỗi bữa ăn gia đình Việt."
-        image="/images/hero-com-chien.png"
-        breadcrumbs={[
-          { label: "Trang chủ", href: "/" },
-          { label: "Sản phẩm" },
-        ]}
-        align="left"
-      />
-      <ProductsPageClient />
-      <UspStrip />
-    </>
-  );
+  return <ProductsPageContent />;
 }

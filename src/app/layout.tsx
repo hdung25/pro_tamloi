@@ -32,6 +32,8 @@ export const metadata: Metadata = {
     "Tâm Lợi Foods — Thương hiệu thực phẩm đông lạnh Việt Nam. Cơm chiên, chả giò, hà lảo, dimsum… nguyên liệu chọn lọc, an toàn chất lượng.",
 };
 
+import { LanguageProvider } from "@/context/language-context";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -43,9 +45,11 @@ export default function RootLayout({
       className={`${beVietnamPro.variable} ${playfairDisplay.variable} ${robotoMono.variable}`}
     >
       <body className="min-h-screen flex flex-col bg-white text-[var(--color-ink)]">
-        <SiteHeader />
-        <main className="flex-1">{children}</main>
-        <SiteFooter />
+        <LanguageProvider>
+          <SiteHeader />
+          <main className="flex-1">{children}</main>
+          <SiteFooter />
+        </LanguageProvider>
       </body>
     </html>
   );

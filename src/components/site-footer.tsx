@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { useLanguage } from "@/context/language-context";
 
 const DISTRIBUTORS = [
   { name: "AEON", src: "/images/dist-aeon.png" },
@@ -12,22 +15,24 @@ const DISTRIBUTORS = [
 ];
 
 export function SiteFooter() {
+  const { language, t } = useLanguage();
+
   return (
     <footer className="mt-20">
       <div className="bg-white">
         <div className="container-page grid gap-10 py-12 md:grid-cols-2">
           <div>
-            <h3 className="text-sm font-bold tracking-wide text-[var(--color-brand)]">
-              LIÊN HỆ VỚI CHÚNG TÔI
+            <h3 className="text-sm font-bold tracking-wide text-[var(--color-brand)] uppercase">
+              {t("footer.contact")}
             </h3>
             <ul className="mt-4 space-y-2 text-[13px] text-[var(--color-ink)]">
-              <li>377A Long Bình, Ấp Long Bình,</li>
-              <li>Xã Mỹ Yên, Tỉnh Tây Ninh, Việt Nam</li>
+              <li>{language === "vi" ? "377A Long Bình, Ấp Long Bình," : "377A Long Binh, Long Binh Hamlet,"}</li>
+              <li>{language === "vi" ? "Xã Mỹ Yên, Tỉnh Tây Ninh, Việt Nam" : "My Yen Commune, Tay Ninh Province, Vietnam"}</li>
               <li>
-                <strong className="font-semibold">Hotline 1:</strong> 0915 015 115
+                <strong className="font-semibold">{language === "vi" ? "Hotline 1:" : "Hotline 1:"}</strong> 0915 015 115
               </li>
               <li>
-                <strong className="font-semibold">Hotline 2:</strong> 0272 363 1665
+                <strong className="font-semibold">{language === "vi" ? "Hotline 2:" : "Hotline 2:"}</strong> 0272 363 1665
               </li>
               <li>
                 <strong className="font-semibold">Email:</strong> info@tamloi.com
@@ -58,14 +63,14 @@ export function SiteFooter() {
           </div>
 
           <div>
-            <h3 className="text-sm font-bold tracking-wide text-[var(--color-brand)]">
-              HỆ THỐNG PHÂN PHỐI
+            <h3 className="text-sm font-bold tracking-wide text-[var(--color-brand)] uppercase">
+              {language === "vi" ? "HỆ THỐNG PHÂN PHỐI" : "DISTRIBUTION SYSTEM"}
             </h3>
             <div className="mt-4 grid grid-cols-4 gap-3">
               {DISTRIBUTORS.map((d) => (
                 <div
                   key={d.name}
-                  className="flex h-14 items-center justify-center rounded-md bg-white px-2"
+                  className="flex h-14 items-center justify-center rounded-md bg-white px-2 shadow-sm border border-gray-100"
                   title={d.name}
                 >
                   <Image
@@ -83,7 +88,7 @@ export function SiteFooter() {
       </div>
 
       <div className="bg-[var(--color-brand)] py-3 text-center text-[12px] text-white">
-        © 2026 Tâm Lợi Foods. All rights reserved.
+        {t("footer.copyright")}
       </div>
     </footer>
   );

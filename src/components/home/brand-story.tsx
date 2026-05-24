@@ -1,32 +1,38 @@
+"use client";
+
 import Image from "next/image";
 import { Reveal } from "@/components/ui/reveal";
+import { useLanguage } from "@/context/language-context";
 
 export function BrandStory() {
+  const { language, t } = useLanguage();
+
   return (
     <section className="bg-[var(--color-bg-soft)] py-16 md:py-20">
       <div className="container-page grid items-center gap-10 md:grid-cols-2 md:gap-16">
         <Reveal direction="right">
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.25em] text-[var(--color-brand)]">
-              Câu chuyện thương hiệu
+              {t("home.story.tag")}
             </p>
             <h2 className="mt-3 font-serif text-3xl font-semibold leading-tight text-[var(--color-ink)] md:text-4xl">
-              Vì bữa ăn ngon lành
-              <br />
-              và cuộc sống lành mạnh
+              {language === "vi" ? (
+                <>
+                  Vì bữa ăn ngon lành
+                  <br />
+                  và cuộc sống lành mạnh
+                </>
+              ) : (
+                <>
+                  For delicious meals
+                  <br />
+                  and a healthy life
+                </>
+              )}
             </h2>
             <div className="mt-6 space-y-4 text-[15px] leading-relaxed text-[var(--color-ink-muted)]">
-              <p>
-                Tâm Lợi Foods tự hào là thương hiệu thực phẩm Việt với hơn 30 năm
-                đồng hành cùng người tiêu dùng — mang đến những bữa ăn ngon lành,
-                tiện lợi, an toàn cho mọi gia đình Việt.
-              </p>
-              <p>
-                Từ nguyên liệu chọn lọc kỹ lưỡng, quy trình sản xuất khép kín đạt
-                chuẩn HACCP và ISO 22000:2018, đến từng sản phẩm trên kệ — chúng
-                tôi cam kết giữ trọn hương vị truyền thống và giá trị dinh dưỡng
-                cho cuộc sống lành mạnh hơn.
-              </p>
+              <p>{t("home.story.p1")}</p>
+              <p>{t("home.story.p2")}</p>
             </div>
             <div className="mt-7">
               <svg viewBox="0 0 200 40" className="h-12 w-40 text-[var(--color-ink)]" aria-hidden>
@@ -39,10 +45,10 @@ export function BrandStory() {
                 />
               </svg>
               <p className="mt-2 text-[15px] font-semibold text-[var(--color-ink)]">
-                VS. Thị Mai Hương
+                {t("home.story.ceo")}
               </p>
               <p className="text-[13px] text-[var(--color-ink-muted)]">
-                Tổng Giám đốc
+                {t("home.story.ceoTitle")}
               </p>
             </div>
           </div>
@@ -61,10 +67,10 @@ export function BrandStory() {
             </div>
             <div className="absolute bottom-5 left-5 max-w-[60%] rounded-xl bg-[var(--color-brand)] px-5 py-4 text-white shadow-lg">
               <p className="font-serif text-base font-bold leading-tight md:text-lg">
-                TÂM LỢI FOODS
+                {language === "vi" ? "TÂM LỢI FOODS" : "TAM LOI FOODS"}
               </p>
               <p className="mt-1 text-[11px] leading-snug opacity-90 md:text-xs">
-                Trọn vẹn từng dòng thực phẩm
+                {language === "vi" ? "Trọn vẹn từng dòng thực phẩm" : "Pure quality in every food line"}
               </p>
             </div>
           </div>

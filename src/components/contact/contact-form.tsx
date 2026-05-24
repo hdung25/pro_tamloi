@@ -1,10 +1,12 @@
 "use client";
 
 import { useState } from "react";
+import { useLanguage } from "@/context/language-context";
 
 type Status = "idle" | "sending" | "sent" | "error";
 
 export function ContactForm() {
+  const { language, t } = useLanguage();
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
@@ -29,7 +31,7 @@ export function ContactForm() {
   return (
     <div className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-[var(--color-line)] md:p-7">
       <h3 className="text-sm font-bold uppercase tracking-wide text-[var(--color-brand)]">
-        Gửi liên hệ cho chúng tôi
+        {t("contact.form.title")}
       </h3>
 
       <form onSubmit={submit} className="mt-4 space-y-3">
@@ -38,7 +40,7 @@ export function ContactForm() {
           required
           value={name}
           onChange={(e) => setName(e.target.value)}
-          placeholder="Họ và tên *"
+          placeholder={`${t("contact.form.name")} *`}
           className={inputCls}
         />
         <input
@@ -46,7 +48,7 @@ export function ContactForm() {
           required
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
-          placeholder="Số điện thoại *"
+          placeholder={`${t("contact.form.phone")} *`}
           className={inputCls}
         />
         <input
@@ -54,14 +56,14 @@ export function ContactForm() {
           required
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          placeholder="Email *"
+          placeholder={`${t("contact.form.email")} *`}
           className={inputCls}
         />
         <textarea
           required
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          placeholder="Nội dung liên hệ *"
+          placeholder={`${t("contact.form.message")} *`}
           rows={5}
           className="w-full rounded-2xl border border-[var(--color-line)] bg-white px-5 py-3 text-[14px] text-[var(--color-ink)] placeholder:text-[var(--color-ink-soft)] transition-colors focus:border-[var(--color-brand)] focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)]/20"
         />
@@ -71,7 +73,7 @@ export function ContactForm() {
           disabled={status === "sending"}
           className="group inline-flex w-full items-center justify-center gap-2 rounded-full bg-[var(--color-brand)] px-7 py-3 text-sm font-semibold uppercase tracking-wide text-white shadow-md transition-all duration-300 hover:-translate-y-0.5 hover:bg-[var(--color-brand-dark)] hover:shadow-lg disabled:cursor-not-allowed disabled:opacity-60"
         >
-          {status === "sending" ? "Đang gửi..." : "Gửi liên hệ"}
+          {status === "sending" ? t("contact.form.sending") : t("contact.form.submit")}
           {status !== "sending" && (
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden>
               <path d="m22 2-7 20-4-9-9-4 20-7Z" />
@@ -81,7 +83,7 @@ export function ContactForm() {
 
         {status === "sent" && (
           <p className="rounded-lg bg-green-50 px-4 py-3 text-center text-[13px] font-medium text-green-700">
-            ✓ Cảm ơn bạn! Tâm Lợi Foods sẽ liên hệ lại trong thời gian sớm nhất.
+            ✓ {t("contact.form.success")}
           </p>
         )}
       </form>

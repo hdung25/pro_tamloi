@@ -1,12 +1,20 @@
-import { Reveal } from "@/components/ui/reveal";
+"use client";
 
-type Step = { title: string; icon: React.ReactNode };
+import { Reveal } from "@/components/ui/reveal";
+import { useLanguage } from "@/context/language-context";
+
+type Step = { 
+  titleVi: string; 
+  titleEn: string;
+  icon: React.ReactNode 
+};
 
 const ICON = "h-8 w-8 text-[var(--color-brand)]";
 
 const STEPS: Step[] = [
   {
-    title: "Nhập nguyên liệu",
+    titleVi: "Nhập nguyên liệu",
+    titleEn: "Source Ingredients",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className={ICON} aria-hidden>
         <path d="M1 7h13v10H1z" />
@@ -17,7 +25,8 @@ const STEPS: Step[] = [
     ),
   },
   {
-    title: "Kiểm định chất lượng",
+    titleVi: "Kiểm định chất lượng",
+    titleEn: "Quality Inspection",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className={ICON} aria-hidden>
         <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z" />
@@ -27,7 +36,8 @@ const STEPS: Step[] = [
     ),
   },
   {
-    title: "Sơ chế",
+    titleVi: "Sơ chế",
+    titleEn: "Pre-processing",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className={ICON} aria-hidden>
         <path d="M6 2v8a4 4 0 0 0 8 0V2" />
@@ -37,7 +47,8 @@ const STEPS: Step[] = [
     ),
   },
   {
-    title: "Cấp đông nhanh",
+    titleVi: "Cấp đông nhanh",
+    titleEn: "Quick Freezing",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className={ICON} aria-hidden>
         <path d="M12 2v20" />
@@ -48,7 +59,8 @@ const STEPS: Step[] = [
     ),
   },
   {
-    title: "Đóng gói",
+    titleVi: "Đóng gói & giao hàng",
+    titleEn: "Packaging & Delivery",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className={ICON} aria-hidden>
         <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z" />
@@ -60,21 +72,23 @@ const STEPS: Step[] = [
 ];
 
 export function AboutProcess() {
+  const { language, t } = useLanguage();
+
   return (
     <section className="bg-[var(--color-cream)] py-16 md:py-20">
       <div className="container-page">
         <Reveal>
           <h2 className="text-center font-serif text-3xl font-semibold text-[var(--color-brand)] md:text-4xl">
-            Quy trình sản xuất
+            {t("about.process.title")}
           </h2>
           <p className="mx-auto mt-2 max-w-xl text-center text-sm text-[var(--color-ink-muted)] md:text-base">
-            5 bước khép kín — kiểm soát chất lượng từ đầu vào đến thành phẩm
+            {language === "vi" ? "5 bước khép kín — kiểm soát chất lượng từ đầu vào đến thành phẩm" : "5 closed steps — quality control from raw materials to final products"}
           </p>
         </Reveal>
 
         <ol className="mt-12 grid grid-cols-2 gap-6 md:grid-cols-5 md:gap-4">
           {STEPS.map((s, i) => (
-            <Reveal key={s.title} direction="up" delay={i * 120}>
+            <Reveal key={s.titleVi} direction="up" delay={i * 120}>
               <li className="group relative flex flex-col items-center text-center">
                 <div className="relative flex h-20 w-20 items-center justify-center rounded-full bg-white shadow-sm ring-2 ring-[var(--color-cream-dark)] transition-all duration-300 group-hover:-translate-y-1 group-hover:ring-[var(--color-brand)]">
                   {s.icon}
@@ -83,7 +97,7 @@ export function AboutProcess() {
                   </span>
                 </div>
                 <h3 className="mt-6 text-[13px] font-semibold text-[var(--color-ink)] md:text-sm">
-                  {s.title}
+                  {language === "vi" ? s.titleVi : s.titleEn}
                 </h3>
                 {i < STEPS.length - 1 && (
                   <span

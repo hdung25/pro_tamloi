@@ -1,32 +1,24 @@
+"use client";
+
 import Image from "next/image";
 import { Reveal } from "@/components/ui/reveal";
+import { useLanguage } from "@/context/language-context";
 
 export function AboutIntro() {
+  const { language, t } = useLanguage();
+
   return (
     <section className="bg-white py-16 md:py-20">
       <div className="container-page grid items-center gap-10 md:grid-cols-2 md:gap-14">
         <Reveal direction="right">
           <div>
             <h2 className="font-serif text-3xl font-semibold text-[var(--color-brand)] md:text-4xl">
-              GIỚI THIỆU
+              {t("about.intro.tag")}
             </h2>
             <div className="mt-6 space-y-4 text-[15px] leading-relaxed text-[var(--color-ink-muted)]">
-              <p>
-                Thành lập từ năm 1987, Tâm Lợi Foods là doanh nghiệp hàng đầu
-                trong lĩnh vực sản xuất và phân phối thực phẩm chế biến tại Việt
-                Nam.
-              </p>
-              <p>
-                Với hệ thống nhà máy hiện đại, quy trình sản xuất khép kín đạt
-                chuẩn quốc tế và đội ngũ hơn 500 nhân viên giàu kinh nghiệm,
-                chúng tôi không ngừng đưa sản phẩm chất lượng đến mọi gia đình
-                Việt — đảm bảo dinh dưỡng, ngon miệng và tiện lợi.
-              </p>
-              <p>
-                Sứ mệnh của Tâm Lợi Foods là mang lại bữa ăn an toàn, hợp khẩu vị
-                và giá phải chăng, đồng hành cùng sức khỏe và niềm vui của hàng
-                triệu người tiêu dùng Việt mỗi ngày.
-              </p>
+              <p>{t("about.intro.p1")}</p>
+              <p>{t("about.intro.p2")}</p>
+              <p>{t("about.intro.p3")}</p>
             </div>
           </div>
         </Reveal>
@@ -50,7 +42,7 @@ export function AboutIntro() {
               </div>
               <div className="bg-[var(--color-brand)] py-1.5 text-center leading-none">
                 <span className="text-[9px] font-bold uppercase tracking-[0.15em] text-white block">
-                  NĂM KINH NGHIỆM
+                  {t("about.intro.badgeText")}
                 </span>
               </div>
             </div>

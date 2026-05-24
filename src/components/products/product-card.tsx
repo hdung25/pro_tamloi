@@ -1,6 +1,9 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import type { Product } from "@/data/products";
+import { useLanguage } from "@/context/language-context";
 
 type Props = {
   product: Product;
@@ -17,20 +20,23 @@ function CartIcon() {
 }
 
 export function ProductCard({ product }: Props) {
+  const { language, t } = useLanguage();
+  const productName = language === "vi" ? product.name : product.nameEn;
+
   return (
     <Link
       href={`/san-pham/${product.slug}`}
       className="group relative block overflow-hidden rounded-xl bg-white shadow-sm ring-1 ring-[var(--color-line)] transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
-      aria-label={product.name}
+      aria-label={productName}
     >
       {product.bestSeller && (
         <span className="absolute left-3 top-3 z-10 rounded-full bg-[var(--color-brand)] px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-white shadow-sm">
-          Best Seller
+          {t("products.bestSeller")}
         </span>
       )}
       <Image
         src={product.image}
-        alt={product.name}
+        alt={productName}
         width={600}
         height={750}
         sizes="(max-width: 768px) 50vw, 33vw"

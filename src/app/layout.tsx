@@ -43,8 +43,12 @@ export default function RootLayout({
     <html
       lang="vi"
       className={`${beVietnamPro.variable} ${playfairDisplay.variable} ${robotoMono.variable}`}
+      suppressHydrationWarning
     >
-      <body className="min-h-screen flex flex-col bg-white text-[var(--color-ink)]">
+      <body 
+        className="min-h-screen flex flex-col bg-white text-[var(--color-ink)]"
+        suppressHydrationWarning
+      >
         <LanguageProvider>
           <SiteHeader />
           <main className="flex-1">{children}</main>
